@@ -25,43 +25,43 @@
 
                 <div class="row mt-sm-4">
                     @foreach ($umkms as $umkm)
-                        <div class="col-12 col-md-12 col-lg-5">
-                            <div class="card profile-widget">
-                                <div class="profile-widget-header text-center">
-                                    @if (!empty($umkm->logo))
-                                        <img src="{{ asset('uploads/logo/' . $umkm->logo) }}" alt="Logo Toko"
-                                            class="rounded profile-widget-picture">
-                                    @else
-                                        <img src="{{ asset('admin/img/avatar/avatar-1.png') }}" alt="image"
-                                            class="rounded-circle profile-widget-picture">
-                                    @endif
+                            <div class="col-12 col-md-12 col-lg-5">
+                                <div class="card profile-widget">
+                                    <div class="profile-widget-header text-center">
+                                        @if (!empty($umkm->logo))
+                                            <img src="{{ asset('uploads/logo/' . $umkm->logo) }}" alt="Logo Toko"
+                                                class="rounded profile-widget-picture">
+                                        @else
+                                            <img src="{{ asset('admin/img/avatar/avatar-1.png') }}" alt="image"
+                                                class="rounded-circle profile-widget-picture">
+                                        @endif
 
-                                    <div class="profile-widget-items d-flex justify-content-center mt-3">
-                                        <div class="profile-widget-item mx-3">
-                                            <div class="profile-widget-item-label">Posts</div>
-                                            <div class="profile-widget-item-value font-weight-bold">187</div>
-                                        </div>
-                                        <div class="profile-widget-item mx-3">
-                                            <div class="profile-widget-item-label">Followers</div>
-                                            <div class="profile-widget-item-value font-weight-bold">6,8K</div>
-                                        </div>
-                                        <div class="profile-widget-item mx-3">
-                                            <div class="profile-widget-item-label">Following</div>
-                                            <div class="profile-widget-item-value font-weight-bold">2,1K</div>
+                                        <div class="profile-widget-items d-flex justify-content-center mt-3">
+                                            <div class="profile-widget-item mx-3">
+                                                <div class="profile-widget-item-label">Posts</div>
+                                                <div class="profile-widget-item-value font-weight-bold">187</div>
+                                            </div>
+                                            <div class="profile-widget-item mx-3">
+                                                <div class="profile-widget-item-label">Followers</div>
+                                                <div class="profile-widget-item-value font-weight-bold">6,8K</div>
+                                            </div>
+                                            <div class="profile-widget-item mx-3">
+                                                <div class="profile-widget-item-label">Following</div>
+                                                <div class="profile-widget-item-value font-weight-bold">2,1K</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="profile-widget-description mt-2">
-                                    <div class="profile-widget-name font-weight-bold">
-                                        {{ $umkm->userUmkm->name }}
-                                        <span class="text-muted font-weight-normal"> / {{ $umkm->nama_toko }}</span>
+                                    <div class="profile-widget-description mt-2">
+                                        <div class="profile-widget-name font-weight-bold">
+                                            {{ $umkm->userUmkm->name }}
+                                            <span class="text-muted font-weight-normal"> / {{ $umkm->nama_toko }}</span>
+                                        </div>
+                                        <p class="mb-1">{{ $umkm->userUmkm->email }}</p>
+                                        <p class="mb-0">{!! $umkm->deskripsi !!}</p>
                                     </div>
-                                    <p class="mb-1">{{ $umkm->userUmkm->email }}</p>
-                                    <p class="mb-0">{!! $umkm->deskripsi !!}</p>
                                 </div>
                             </div>
-                        </div>
                     @endforeach
                     <div class="col-12 col-md-12 col-lg-7">
                         <div class="card shadow-sm">
@@ -134,5 +134,5 @@
 
     <script src="{{ asset('admin/library/summernote/dist/summernote-bs4.js') }}"></script>
     <!-- Page Specific JS File -->
-    <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
+    <script src="{{ asset('admin/js/page/forms-advanced-forms.js') }}"></script>
 @endpush

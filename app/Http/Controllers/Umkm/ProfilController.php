@@ -15,7 +15,7 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        $umkms = Umkm::with('userUmkm')->get();
+        $umkms = Umkm::with('userUmkm')->where('user_id', Auth::id())->get();
         $users = User::all();
         return view('pages.umkm.profil.index', ['umkms' => $umkms, 'users' => $users]);
     }
@@ -26,10 +26,15 @@ class ProfilController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        $umkm = Umkm::where('umkm_id', $user->id)->first();
+        $umkm = Umkm::where('user_id', $user->id)->first();
+
+        if (!$umkm) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses profil ini.');
+        }
 
         return view('pages.umkm.profil.index', compact('user', 'umkm'));
     }
+
 
     public function update(Request $request, $id)
     {
@@ -65,7 +70,7 @@ class ProfilController extends Controller
             $umkm->update($data);
         } else {
             $data = [
-                'umkm_id' => Auth::id(),
+                'user_id' => Auth::id(),
                 'nama_toko' => $request->nama_toko,
                 'alamat' => $request->alamat,
                 'no_telp' => $request->no_telp,

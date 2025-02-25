@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('umkms', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('umkm_id')->nullable();
             $table->foreignId('user_id')->nullable();
-            $table->string('nama_toko')->nullable();
-            $table->text('alamat')->nullable();
-            $table->string('no_telp')->nullable();
-            $table->string('logo')->nullable();
-            $table->text('deskripsi')->nullable();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->string('nama_product');
+            $table->foreignId('kategori_id');
+            $table->text('deskripsi');
+            $table->double('harga', 10,2);
+            $table->string('foto_product');
+            $table->enum('status', ['finished', 'available'])->default('finished');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('umkms');
+        Schema::dropIfExists('products');
     }
 };

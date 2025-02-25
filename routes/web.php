@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UmkmController as AuthUmkmController;
+use App\Http\Controllers\Umkm\ProductController;
 use App\Http\Controllers\Umkm\ProfilController;
 use App\Http\Controllers\Umkm\UmkmController;
 use App\Http\Controllers\User\UserController;
@@ -31,6 +32,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:umkm'])->group(function () {
     Route::get('/umkm/welcome', [UmkmController::class, 'welcome'])->name('pages.umkm.welcome');
     Route::resource('profile', ProfilController::class);
+    Route::resource('product', ProductController::class);
+    Route::put('/product/{id}/update-status', [ProductController::class, 'updateStatus']);
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
