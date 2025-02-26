@@ -20,7 +20,6 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            // Redirect berdasarkan role user
             if ($user->hasRole('admin')) {
                 return redirect()->route('pages.admin.welcome');
             } elseif ($user->hasRole('umkm')) {

@@ -23,8 +23,7 @@ class RoleMiddleware
     }
 
     protected $routeMiddleware = [
-        // ...
-
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 
     protected $middlewareAliases = [

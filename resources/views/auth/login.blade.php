@@ -63,7 +63,7 @@
                     </a>
                 </div>
                 <div class="col-6">
-                    <a class="btn btn-block btn-social btn-facebook">
+                    <a class="btn btn-block btn-social btn-facebook" href="{{ route('user.register') }}">
                         <span class="fas fa-user"></span> Daftar User
                     </a>
                 </div>

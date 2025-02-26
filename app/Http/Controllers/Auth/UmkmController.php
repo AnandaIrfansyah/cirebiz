@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,14 +34,15 @@ class UmkmController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'status' => 'pending',
         ]);
 
         $user->assignRole('umkm');
 
+        event(new Registered($user));
+
         Auth::login($user);
 
-        return redirect()->route('pages.umkm.welcome')->with('success', 'Pendaftaran berhasil! Tunggu verifikasi admin.');
+        return redirect()->route('pages.umkm.welcome')->with('success', 'Pendaftaran berhasil!');
     }
 
     /**
