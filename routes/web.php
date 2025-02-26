@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\UserController as AuthUserController;
 use App\Http\Controllers\Umkm\ProductController;
 use App\Http\Controllers\Umkm\ProfilController;
 use App\Http\Controllers\Umkm\UmkmController;
+use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request as HttpRequest;
@@ -45,20 +46,20 @@ Route::post('/email/verification-notification', function (HttpRequest $request) 
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
-Route::middleware(['auth','verified', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/admin/welcome', [AdminController::class, 'welcome'])->name('pages.admin.welcome');
     Route::resource('approvedumkm', ApprovedUmkmController::class);
     Route::put('/approvedumkm/{id}/update-status', [ApprovedUmkmController::class, 'updateStatus']);
     Route::resource('kategori', KategoriController::class);
 });
 
-Route::middleware(['auth','verified', 'role:umkm'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:umkm'])->group(function () {
     Route::get('/umkm/welcome', [UmkmController::class, 'welcome'])->name('pages.umkm.welcome');
     Route::resource('profile', ProfilController::class);
     Route::resource('product', ProductController::class);
     Route::put('/product/{id}/update-status', [ProductController::class, 'updateStatus']);
 });
 
-Route::middleware(['auth','verified', 'role:user'])->group(function () {
-    Route::get('/user/welcome', [UserController::class, 'welcome'])->name('pages.user.welcome');
+Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
+    Route::resource('home', HomeController::class);
 });

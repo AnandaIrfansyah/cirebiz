@@ -25,7 +25,7 @@ class LoginController extends Controller
             } elseif ($user->hasRole('umkm')) {
                 return redirect()->route('pages.umkm.welcome');
             } elseif ($user->hasRole('user')) {
-                return redirect()->route('pages.user.welcome');
+                return redirect()->route('home.index');
             }
         }
 
