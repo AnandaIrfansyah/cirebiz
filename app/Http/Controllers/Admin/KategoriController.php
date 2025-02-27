@@ -33,10 +33,20 @@ class KategoriController extends Controller
     {
         $request->validate([
             'kategori' => 'required',
+            'foto_kategori' => 'required|image|max:4096',
         ]);
+
+        if ($request->hasFile('foto_kategori')) {
+            $file = $request->file('foto_kategori');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/kategori'), $filename);
+        } else {
+            $filename = null;
+        }
 
         Kategori::create([
             'kategori' => $request->kategori,
+            'foto_kategori' => $filename,
         ]);
 
         return redirect()->route('kategori.index')->with('succes', 'Data kategori berhasil ditambahkan.');

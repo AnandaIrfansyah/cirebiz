@@ -3,6 +3,12 @@
 @section('title', 'Dashboard')
 
 @push('style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        .product-item {
+            border-color: #3b5d50 !important;
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -32,61 +38,51 @@
     <div class="product-section">
         <div class="container">
             <div class="row">
-
                 <!-- Start Column 1 -->
                 <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
                     <h2 class="mb-4 section-title">Crafted with excellent material.</h2>
-                    <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                        vulputate velit imperdiet dolor tempor tristique. </p>
-                    <p><a href="shop.html" class="btn">Explore</a></p>
+                    <p class="mb-4">
+                        Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit.
+                        Aliquam vulputate velit imperdiet dolor tempor tristique.
+                    </p>
+                    <p><a href="shop.html" class="btn btn-dark">Explore</a></p>
                 </div>
                 <!-- End Column 1 -->
 
-                <!-- Start Column 2 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="{{ asset('images/product-1.png') }}" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$50.00</strong>
+                <!-- Start Swiper Slider -->
+                <div class="col-md-9">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($kategoris as $kategori)
+                                <div class="swiper-slide text-center">
+                                    <div class="card p-4 shadow-sm">
+                                        <div class="author-pic mx-auto"
+                                            style="width: 100px; height: 100px; overflow: hidden;">
+                                            <img src="{{ asset('uploads/kategori/' . $kategori->foto_kategori) }}"
+                                                alt="{{ $kategori->kategori }}" class="img-fluid rounded-circle"
+                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <h5 class="mt-3 font-weight-bold">{{ $kategori->kategori }}</h5>
+                                        <span class="text-muted small">CEO, Co-Founder, XYZ Inc.</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
 
-                        <span class="icon-cross">
-                            <img src="{{ asset('images/cross.svg') }}" class="img-fluid">
-                        </span>
-                    </a>
+                        <!-- Navigasi -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+
+                        <!-- Pagination -->
+                    </div>
                 </div>
-                <!-- End Column 2 -->
-
-                <!-- Start Column 3 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="{{ asset('images/product-2.png') }}" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Kruzo Aero Chair</h3>
-                        <strong class="product-price">$78.00</strong>
-
-                        <span class="icon-cross">
-                            <img src="{{ asset('images/cross.svg') }}" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 3 -->
-
-                <!-- Start Column 4 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="{{ asset('images/product-3.png') }}" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Ergonomic Chair</h3>
-                        <strong class="product-price">$43.00</strong>
-
-                        <span class="icon-cross">
-                            <img src="{{ asset('images/cross.svg') }}" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 4 -->
-
+                <!-- End Swiper Slider -->
             </div>
         </div>
     </div>
+
+
+
     <!-- End Product Section -->
 
     <!-- Start Product Section -->
@@ -234,4 +230,26 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3, // Bisa diganti sesuai kebutuhan
+            spaceBetween: 20,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                },
+                1200: {
+                    slidesPerView: 4
+                }
+            }
+        });
+    </script>
 @endpush

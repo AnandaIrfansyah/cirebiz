@@ -20,7 +20,7 @@ class HomeController extends Controller
         $profils = Umkm::all();
         $users = User::all();
         $kategoris = Kategori::all();
-        return view('pages.user.welcome', ['products' => $products, 'profils' => $profils, 'users' => $users, 'kategoris' => $kategoris]);
+        return view('pages.user.home', ['products' => $products, 'profils' => $profils, 'users' => $users, 'kategoris' => $kategoris]);
     }
 
     /**

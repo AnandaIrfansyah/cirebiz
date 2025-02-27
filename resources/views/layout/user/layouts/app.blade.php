@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Untree.co">
-    <link rel="shortcut icon" href="favicon.png">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap4" />
@@ -16,6 +16,8 @@
     <link href="{{ asset('css/tiny-slider.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <title>@yield('title') UMKMKU</title>
+
+    @stack('style')
 </head>
 
 <body>
@@ -31,7 +33,7 @@
     </div>
 
     @stack('scripts')
-    
+
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/tiny-slider.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>

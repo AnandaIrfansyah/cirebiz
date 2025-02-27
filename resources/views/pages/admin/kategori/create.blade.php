@@ -32,6 +32,10 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
+                                <label>Foto Kategori</label>
+                                <input type="file" class="form-control" name="foto_kategori" id="foto_kategori">
+                            </div>
+                            <div class="form-group">
                                 <label>Nama Kategori</label>
                                 <input type="text" class="form-control" name="kategori" id="kategori">
                             </div>

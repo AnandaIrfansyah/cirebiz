@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
     <link rel="stylesheet" href="{{ asset('library/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+    <style>
+        .foto-kategori {
+            margin: 5px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -18,7 +25,7 @@
             <div class="section-header">
                 <h1>Kategori</h1>
                 <div class="section-header-button">
-                    <a href="{{route('kategori.create')}}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('kategori.create') }}" class="btn btn-primary">Add New</a>
                 </div>
             </div>
 
@@ -51,6 +58,7 @@
                                         <thead class="bg-primary">
                                             <tr>
                                                 <th class="text-white">No</th>
+                                                <th class="text-white">Foto Kategori</th>
                                                 <th class="text-white">Kategori</th>
                                                 <th class="text-white">#</th>
                                             </tr>
@@ -58,6 +66,8 @@
                                         @foreach ($kategoris as $kategori)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
+                                                <td><img src="{{ asset('uploads/kategori/' . $kategori->foto_kategori) }}"
+                                                        alt="Foto Kategori" class="foto-kategori" style="width: 100px"></td>
                                                 <td>{{ $kategori->kategori }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
