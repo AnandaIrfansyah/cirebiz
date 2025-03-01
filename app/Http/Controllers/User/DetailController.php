@@ -3,26 +3,21 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kategori;
 use App\Models\Product;
-use App\Models\Umkm;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $products = Product::with('profilUmkm', 'kategori', 'userProduct')->where('status', 'available')->get();
-        $profils = Umkm::all();
-        $users = User::all();
-        $kategoris = Kategori::all();
-        return view('pages.user.home', ['products' => $products, 'profils' => $profils, 'users' => $users, 'kategoris' => $kategoris]);
-    }
 
+    public function show($id)
+    {
+        $products = Product::findOrFail($id);
+        return view('pages.user.detail', ['products' => $products]);
+    }
+    public function index() {}
     /**
      * Show the form for creating a new resource.
      */
@@ -42,10 +37,6 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

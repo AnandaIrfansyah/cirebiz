@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ApprovedUmkmController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UmkmController as AuthUmkmController;
@@ -10,7 +9,9 @@ use App\Http\Controllers\Auth\UserController as AuthUserController;
 use App\Http\Controllers\Umkm\ProductController;
 use App\Http\Controllers\Umkm\ProfilController;
 use App\Http\Controllers\Umkm\UmkmController;
+use App\Http\Controllers\User\DetailController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\KeranjangController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request as HttpRequest;
@@ -62,4 +63,6 @@ Route::middleware(['auth', 'verified', 'role:umkm'])->group(function () {
 
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::resource('home', HomeController::class);
+    Route::resource('keranjang', KeranjangController::class);
+    Route::resource('detail', DetailController::class);
 });

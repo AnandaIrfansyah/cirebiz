@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarsFurni">
             <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="{{ route('home.index') }}">Home</a>
                 </li>
                 <li><a class="nav-link" href="shop.html">Shop</a></li>
                 <li><a class="nav-link" href="about.html">About us</a></li>
@@ -35,7 +35,8 @@
                         </li>
                     </ul>
                 </li>
-                <li><a class="nav-link" href="cart.html"><img src="{{ asset('images/cart.svg') }}"></a></li>
+                <li><a class="nav-link" href="{{ route('keranjang.index') }}"><img
+                            src="{{ asset('images/cart.svg') }}"></a></li>
             </ul>
         </div>
     </div>

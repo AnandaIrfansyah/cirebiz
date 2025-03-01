@@ -5,9 +5,7 @@
 @push('style')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        .product-item {
-            border-color: #3b5d50 !important;
-        }
+
     </style>
 @endpush
 
@@ -63,7 +61,6 @@
                                                 style="width: 100%; height: 100%; object-fit: cover;">
                                         </div>
                                         <h5 class="mt-3 font-weight-bold">{{ $kategori->kategori }}</h5>
-                                        <span class="text-muted small">CEO, Co-Founder, XYZ Inc.</span>
                                     </div>
                                 </div>
                             @endforeach
@@ -73,16 +70,12 @@
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
 
-                        <!-- Pagination -->
                     </div>
                 </div>
                 <!-- End Swiper Slider -->
             </div>
         </div>
     </div>
-
-
-
     <!-- End Product Section -->
 
     <!-- Start Product Section -->
@@ -93,7 +86,7 @@
                 @foreach ($products as $product)
                     <!-- Start Column 1 -->
                     <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        <a class="product-item border border-2 rounded" href="cart.html">
+                        <a class="product-item card rounded" href="{{ route('detail.show', ['detail' => $product->id]) }}">
                             <img src="{{ asset('uploads/product_images/' . $product->foto_product) }}"
                                 class="img-fluid product-thumbnail">
                             <h3 class="product-title">{{ $product->nama_product }}</h3>
@@ -131,94 +124,28 @@
                         </div>
 
                         <div class="testimonial-slider">
+                            @foreach ($kategoris as $kategori)
+                                <div class="item">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8 mx-auto">
 
-                            <div class="item">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8 mx-auto">
+                                            <div class="testimonial-block text-center">
 
-                                        <div class="testimonial-block text-center">
-                                            <blockquote class="mb-5">
-                                                <p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                                                    odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                                    vulputate velit imperdiet dolor tempor tristique. Pellentesque
-                                                    habitant morbi tristique senectus et netus et malesuada fames ac
-                                                    turpis egestas. Integer convallis volutpat dui quis
-                                                    scelerisque.&rdquo;</p>
-                                            </blockquote>
 
-                                            <div class="author-info">
-                                                <div class="author-pic">
-                                                    <img src="{{ asset('images/person-1.png') }}" alt="Maria Jones"
-                                                        class="img-fluid">
+                                                <div class="author-info">
+                                                    <div class="author-pic">
+                                                        <img src="{{ asset('uploads/kategori/' . $kategori->foto_kategori) }}"
+                                                            alt="Maria Jones" class="img-fluid">
+                                                    </div>
+                                                    <h3 class="font-weight-bold">{{ $kategori->kategori }}</h3>
+                                                    <span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
                                                 </div>
-                                                <h3 class="font-weight-bold">Maria Jones</h3>
-                                                <span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- END item -->
-
-                            <div class="item">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8 mx-auto">
-
-                                        <div class="testimonial-block text-center">
-                                            <blockquote class="mb-5">
-                                                <p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                                                    odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                                    vulputate velit imperdiet dolor tempor tristique. Pellentesque
-                                                    habitant morbi tristique senectus et netus et malesuada fames ac
-                                                    turpis egestas. Integer convallis volutpat dui quis
-                                                    scelerisque.&rdquo;</p>
-                                            </blockquote>
-
-                                            <div class="author-info">
-                                                <div class="author-pic">
-                                                    <img src="{{ asset('images/person-1.png') }}" alt="Maria Jones"
-                                                        class="img-fluid">
-                                                </div>
-                                                <h3 class="font-weight-bold">Maria Jones</h3>
-                                                <span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END item -->
-
-                            <div class="item">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8 mx-auto">
-
-                                        <div class="testimonial-block text-center">
-                                            <blockquote class="mb-5">
-                                                <p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                                                    odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                                    vulputate velit imperdiet dolor tempor tristique. Pellentesque
-                                                    habitant morbi tristique senectus et netus et malesuada fames ac
-                                                    turpis egestas. Integer convallis volutpat dui quis
-                                                    scelerisque.&rdquo;</p>
-                                            </blockquote>
-
-                                            <div class="author-info">
-                                                <div class="author-pic">
-                                                    <img src="{{ asset('images/person-1.png') }}" alt="Maria Jones"
-                                                        class="img-fluid">
-                                                </div>
-                                                <h3 class="font-weight-bold">Maria Jones</h3>
-                                                <span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END item -->
-
+                            @endforeach
                         </div>
 
                     </div>
