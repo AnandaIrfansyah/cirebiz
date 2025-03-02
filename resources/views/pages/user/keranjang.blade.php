@@ -30,42 +30,46 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="product-thumbnail">Image</th>
-                                    <th class="product-name">Product</th>
-                                    <th class="product-price">Price</th>
+                                    <th class="product-thumbnail">Foto Product</th>
+                                    <th class="product-name">Nama Product</th>
+                                    <th class="product-price">Harga</th>
                                     <th class="product-quantity">Quantity</th>
                                     <th class="product-total">Total</th>
                                     <th class="product-remove">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <img src="images/product-1.png" alt="Image" class="img-fluid">
-                                    </td>
-                                    <td class="product-name">
-                                        <h2 class="h5 text-black">Product 1</h2>
-                                    </td>
-                                    <td>$49.00</td>
-                                    <td>
-                                        <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                            style="max-width: 120px;">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-outline-black decrease"
-                                                    type="button">&minus;</button>
+                                @foreach ($keranjangs as $cart)
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <img src="{{ asset('uploads/product_images/' . $cart->productCart->foto_product) }}"
+                                                alt="Image" class="img-fluid">
+                                        </td>
+                                        <td class="product-name">
+                                            <h2 class="h5 text-black">{{ $cart->productCart->nama_product }}</h2>
+                                        </td>
+                                        <td>Rp {{ number_format($cart->productCart->harga, 0, ',', '.') }}</td>
+                                        <td>
+                                            <div class="input-group mb-3 d-flex align-items-center quantity-container"
+                                                style="max-width: 120px;">
+                                                <div class="input-group-prepend">
+                                                    <button class="btn btn-outline-black decrease"
+                                                        type="button">&minus;</button>
+                                                </div>
+                                                <input type="text" class="form-control text-center quantity-amount"
+                                                    value="{{ $cart->qty }}" placeholder=""
+                                                    aria-label="Example text with button addon"
+                                                    aria-describedby="button-addon1">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-black increase"
+                                                        type="button">&plus;</button>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control text-center quantity-amount"
-                                                value="1" placeholder="" aria-label="Example text with button addon"
-                                                aria-describedby="button-addon1">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-black increase"
-                                                    type="button">&plus;</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>$49.00</td>
-                                    <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                                </tr>
+                                        </td>
+                                        <td>Rp {{ number_format($cart->total, 0, ',', '.') }}</td>
+                                            <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

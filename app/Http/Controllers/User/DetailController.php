@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Keranjang;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DetailController extends Controller
 {
@@ -31,8 +33,28 @@ class DetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'qty' => 'required|string|min:1'
+        ]);
+
+        $product = Product::findOrFail($request->product_id);
+        $total = $product->harga * $request->qty;
+
+        Keranjang::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'product_id' => $request->product_id
+            ],
+            [
+                'qty' => $request->qty,
+                'total' => $total
+            ]
+        );
+
+        return redirect()->route('keranjang.index')->with('success', 'Produk berhasil ditambahkan ke keranjang!');
     }
+
 
     /**
      * Display the specified resource.

@@ -68,12 +68,17 @@
                         <h3>{{ $products->nama_product }}</h3>
                         <p class="price"><span>Rp {{ number_format($products->harga, 0, ',', '.') }}</span></p>
                         <p>{!! $products->deskripsi !!}</p>
-                        <div class="quantity-container">
-                            <button class="btn btn-outline-secondary decrease">&minus;</button>
-                            <input type="text" class="form-control text-center mx-2 quantity-amount" value="1">
-                            <button class="btn btn-outline-secondary increase">&plus;</button>
-                        </div>
-                        <a href="cart.html" class="btn btn-primary mt-3">Add to Cart</a>
+                        <form action="{{ route('detail.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $products->id }}">
+                            <div class="quantity-container">
+                                <button type="button" class="btn btn-outline-secondary decrease">&minus;</button>
+                                <input type="text" name="qty" class="form-control text-center mx-2 quantity-amount"
+                                    value="1" min="1">
+                                <button type="button" class="btn btn-outline-secondary increase">&plus;</button>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Add to Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -129,6 +134,19 @@
                     let target = document.querySelector(this.getAttribute("href"));
                     target.classList.add("show", "active");
                 });
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".increase").addEventListener("click", function() {
+                let qtyInput = document.querySelector(".quantity-amount");
+                qtyInput.value = parseInt(qtyInput.value) + 1;
+            });
+
+            document.querySelector(".decrease").addEventListener("click", function() {
+                let qtyInput = document.querySelector(".quantity-amount");
+                if (qtyInput.value > 1) {
+                    qtyInput.value = parseInt(qtyInput.value) - 1;
+                }
             });
         });
     </script>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'products';
-    protected $fillable = ['umkm_id','user_id','nama_product','kategori_id','deskripsi','harga','foto_product','status'];
+    protected $fillable = ['umkm_id', 'user_id', 'nama_product', 'kategori_id', 'deskripsi', 'harga', 'foto_product', 'status'];
 
     public function profilUmkm()
     {
@@ -20,5 +20,9 @@ class Product extends Model
     public function userProduct()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function cart()
+    {
+        return $this->hasMany(Keranjang::class);
     }
 }

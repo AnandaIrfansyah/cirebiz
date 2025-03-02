@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Keranjang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KeranjangController extends Controller
 {
@@ -12,8 +14,10 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        return view ('pages.user.keranjang');
+        $keranjangs = Keranjang::where('user_id', Auth::id())->with('productCart')->get();
+        return view('pages.user.keranjang', compact('keranjangs'));
     }
+
 
     /**
      * Show the form for creating a new resource.
