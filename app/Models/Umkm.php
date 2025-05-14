@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Umkm extends Model
 {
     protected $table = 'umkms';
-    protected $fillable = ['user_id','nama_toko','alamat','no_telp','logo','status','deskripsi'];
+    protected $fillable = ['user_id', 'nama_toko', 'alamat', 'no_telp', 'logo', 'status', 'deskripsi'];
 
     public function userUmkm()
     {
@@ -17,6 +17,4 @@ class Umkm extends Model
     {
         return $this->hasMany(Product::class, 'umkm_id', 'id');
     }
-
-
 }

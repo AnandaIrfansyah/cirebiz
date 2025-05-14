@@ -1,4 +1,4 @@
-@extends('layout.umkm.layouts.app')
+@extends('layouts.umkm')
 
 @section('title', 'Tambah Produk')
 
@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group">
                                 <label><i class="fas fa-box"></i> Kategori</label>
-                                <select name="kategori_id" id="kategori_id" class="form-control select2" required>
+                                <select name="kategori_id" id="kategori_id" class="form-control selectric" required>
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($kategoris as $kategori)
                                         <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>

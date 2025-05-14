@@ -1,4 +1,4 @@
-@extends('layout.umkm.layouts.app')
+@extends('layouts.umkm')
 
 @section('title', 'Dashboard')
 

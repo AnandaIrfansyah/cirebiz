@@ -9,7 +9,8 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
             <li class="nav-item">
-                <a href="{{ route('pages.admin.welcome') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                <a href="{{ route('pages.admin.welcome') }}" class="nav-link"><i
+                        class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
         </ul>
         <ul class="sidebar-menu">
@@ -17,6 +18,9 @@
             <li class="nav-item">
                 <a href="{{ url('approvedumkm') }}" class="nav-link"><i class="fas fa-fire"></i><span>Approved
                         UMKM</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('accountuser') }}" class="nav-link"><i class="fas fa-fire"></i><span>Data User</span></a>
             </li>
         </ul>
         <ul class="sidebar-menu">

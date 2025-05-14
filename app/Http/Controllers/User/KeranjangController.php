@@ -14,56 +14,20 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        $keranjangs = Keranjang::where('user_id', Auth::id())->with('productCart')->get();
+        $keranjangs = Keranjang::where('user_id', Auth::id())->with('productCart')->paginate(5);
         return view('pages.user.keranjang', compact('keranjangs'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function destroy($id)
     {
-        //
-    }
+        $keranjang = Keranjang::findOrFail($id);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($keranjang->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $keranjang->delete();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang.');
     }
 }

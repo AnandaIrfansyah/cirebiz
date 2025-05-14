@@ -24,11 +24,11 @@
     <div id="app">
         <div class="main-wrapper">
 
-            @include('layout.user.components.header')
+            @include('components.user.header')
 
             @yield('main')
 
-            @include('layout.user.components.footer')
+            @include('components.user.footer')
         </div>
     </div>
 

@@ -1,34 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Umkm;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class ApprovedUmkmController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $umkms = Umkm::with('userUmkm')
-            ->paginate(10);
-
-        return view('pages.admin.dataPengguna.approvedumkm.index', compact('umkms'));
+        return view('pages.user.checkout');
     }
-
-    public function updateStatus(Request $request, $id)
-    {
-        $umkm = Umkm::findOrFail($id);
-        $umkm->status = $request->status;
-        $umkm->save();
-
-        return response()->json(['success' => true, 'status' => $umkm->status]);
-    }
-
 
     /**
      * Show the form for creating a new resource.

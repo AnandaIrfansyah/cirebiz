@@ -1,4 +1,4 @@
-@extends('layout.user.layouts.app')
+@extends('layouts.user')
 
 @section('title', 'Dashboard')
 
@@ -160,7 +160,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 3, // Bisa diganti sesuai kebutuhan
+            slidesPerView: 3,
             spaceBetween: 20,
             navigation: {
                 nextEl: ".swiper-button-next",

@@ -39,7 +39,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('pages.user.welcome')->with('success', 'Pendaftaran berhasil!');
+        return redirect()->route('home.index')->with('success', 'Pendaftaran berhasil!');
     }
 
     /**

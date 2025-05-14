@@ -1,4 +1,4 @@
-@extends('layout.admin.layouts.auth')
+@extends('auth.layouts.auth')
 
 @section('title', 'Register UMKM')
 

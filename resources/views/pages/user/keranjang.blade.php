@@ -1,8 +1,9 @@
-@extends('layout.user.layouts.app')
+@extends('layouts.user')
 
 @section('title', 'Keranjang')
 
 @push('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 @endpush
 
 @section('main')
@@ -15,21 +16,19 @@
                     </div>
                 </div>
                 <div class="col-lg-7">
-
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Hero Section -->
 
     <div class="untree_co-section before-footer-section">
         <div class="container">
             <div class="row mb-5">
-                <form class="col-md-12" method="post">
                     <div class="site-blocks-table">
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th class="product-select">Pilih</th>
                                     <th class="product-thumbnail">Foto Product</th>
                                     <th class="product-name">Nama Product</th>
                                     <th class="product-price">Harga</th>
@@ -39,41 +38,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($keranjangs as $cart)
+                                @foreach ($keranjangs as $keranjang)
                                     <tr>
+                                        <td class="product-select">
+                                            <input type="checkbox" class="product-checkbox"
+                                                data-total="{{ $keranjang->total }}">
+                                        </td>
                                         <td class="product-thumbnail">
-                                            <img src="{{ asset('uploads/product_images/' . $cart->productCart->foto_product) }}"
+                                            <img src="{{ asset('uploads/product_images/' . $keranjang->productCart->foto_product) }}"
                                                 alt="Image" class="img-fluid">
                                         </td>
                                         <td class="product-name">
-                                            <h2 class="h5 text-black">{{ $cart->productCart->nama_product }}</h2>
+                                            <h2 class="h5 text-black">{{ $keranjang->productCart->nama_product }}</h2>
                                         </td>
-                                        <td>Rp {{ number_format($cart->productCart->harga, 0, ',', '.') }}</td>
+                                        <td>Rp {{ number_format($keranjang->productCart->harga, 0, ',', '.') }}</td>
+                                        <td>{{ $keranjang->qty }}</td>
+                                        <td>Rp {{ number_format($keranjang->total, 0, ',', '.') }}</td>
                                         <td>
-                                            <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                                style="max-width: 120px;">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-black decrease"
-                                                        type="button">&minus;</button>
-                                                </div>
-                                                <input type="text" class="form-control text-center quantity-amount"
-                                                    value="{{ $cart->qty }}" placeholder=""
-                                                    aria-label="Example text with button addon"
-                                                    aria-describedby="button-addon1">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-black increase"
-                                                        type="button">&plus;</button>
-                                                </div>
-                                            </div>
+                                            <form action="{{ route('keranjang.destroy', $keranjang->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
-                                        <td>Rp {{ number_format($cart->total, 0, ',', '.') }}</td>
-                                            <td><a href="#" class="btn btn-black btn-sm">X</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                </form>
+                    {{ $keranjangs->onEachSide(1)->links('pagination::bootstrap-5') }}
             </div>
 
             <div class="row">
@@ -85,27 +80,20 @@
                                     <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <span class="text-black">Subtotal</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
-                                </div>
-                            </div>
                             <div class="row mb-5">
                                 <div class="col-md-6">
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black" id="cart-total">Rp 0</strong>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-black btn-lg py-3 btn-block"
-                                        onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                        onclick="window.location='{{ route('checkout.index') }}'">Proceed To
+                                        Checkout</button>
                                 </div>
                             </div>
                         </div>
@@ -117,4 +105,24 @@
 @endsection
 
 @push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkboxes = document.querySelectorAll(".product-checkbox");
+            const totalDisplay = document.getElementById("cart-total");
+
+            function updateTotal() {
+                let total = 0;
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        total += parseFloat(checkbox.getAttribute("data-total"));
+                    }
+                });
+                totalDisplay.textContent = "Rp " + total.toLocaleString("id-ID");
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", updateTotal);
+            });
+        });
+    </script>
 @endpush
