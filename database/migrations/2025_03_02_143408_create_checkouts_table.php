@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('phone');
+            $table->text('address');
+            $table->string('postal_code');
+            $table->text('notes')->nullable();
+            $table->string('payment_method');
+            $table->decimal('total_price', 10, 2);
             $table->timestamps();
         });
     }

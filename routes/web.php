@@ -69,4 +69,7 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::resource('detail', DetailController::class);
     Route::resource('checkout', CheckoutController::class);
     Route::resource('keranjang', KeranjangController::class);
+    Route::get('/thank-you', function () {
+        return view('pages.user.thankyou');
+    })->name('pages.user.thankyou');
 });
