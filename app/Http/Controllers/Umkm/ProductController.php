@@ -86,9 +86,61 @@ class ProductController extends Controller
 
     public function show(string $id) {}
 
-    public function edit(string $id) {}
+    public function edit(string $id)
+    {
+        $product = Product::findOrFail($id);
+        $profils = Umkm::all();
+        $users = User::all();
+        $kategoris = Kategori::all();
 
-    public function update(Request $request, string $id) {}
+        return view('pages.umkm.produk.edit', compact('product', 'profils', 'users', 'kategoris'));
+    }
 
-    public function destroy(string $id) {}
+    public function update(Request $request, string $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'nama_product' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'deskripsi' => 'required',
+            'harga' => 'required|numeric',
+            'foto_product' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($request->hasFile('foto_product')) {
+            $file = $request->file('foto_product');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/product_images'), $filename);
+
+            if ($product->foto_product && file_exists(public_path('uploads/product_images/' . $product->foto_product))) {
+                unlink(public_path('uploads/product_images/' . $product->foto_product));
+            }
+
+            $product->foto_product = $filename;
+        }
+
+        $product->update([
+            'nama_product' => $request->nama_product,
+            'kategori_id' => $request->kategori_id,
+            'deskripsi' => $request->deskripsi,
+            'harga' => $request->harga,
+        ]);
+
+        return redirect()->route('product.index')->with('success', 'Produk berhasil diperbarui!');
+    }
+
+
+    public function destroy(string $id)
+    {
+        $product = Product::findOrFail($id);
+
+        if ($product->foto_product && file_exists(public_path('uploads/product_images/' . $product->foto_product))) {
+            unlink(public_path('uploads/product_images/' . $product->foto_product));
+        }
+
+        $product->delete();
+
+        return redirect()->route('product.index')->with('success', 'Produk berhasil dihapus!');
+    }
 }
