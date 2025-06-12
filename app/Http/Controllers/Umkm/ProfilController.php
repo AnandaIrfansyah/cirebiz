@@ -20,9 +20,6 @@ class ProfilController extends Controller
         return view('pages.umkm.profil.index', ['umkms' => $umkms, 'users' => $users]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit()
     {
         $user = Auth::user();
@@ -65,6 +62,10 @@ class ProfilController extends Controller
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads/logo'), $filename);
                 $data['logo'] = $filename;
+            }
+
+            if ($umkm->status != 'approved') {
+                $data['status'] = 'pending';
             }
 
             $umkm->update($data);
